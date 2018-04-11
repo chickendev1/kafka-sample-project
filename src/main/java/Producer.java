@@ -8,6 +8,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
  */
 public class Producer {
 	public static void main(String[] args) {
+		System.out.println("Start producing...");
 		// set up the producer
 		// http://kafka.apache.org/08/documentation/#configuration
 		Properties properties = new Properties();
@@ -28,6 +29,10 @@ public class Producer {
             // send lots of messages without caring the previous messages has been sent successfully
             producer.send(new ProducerRecord<String, String>(
                     "KAFKA-SAMPLE-PROJECT-TOPIC-1",
+                    "Message " + i + " at " + Double.toString(System.nanoTime() * 1e-9)));
+            
+            producer.send(new ProducerRecord<String, String>(
+                    "topic-test",
                     "Message " + i + " at " + Double.toString(System.nanoTime() * 1e-9)));
             
             // flush make sure that all previous has been sent successfully base on the acks config
