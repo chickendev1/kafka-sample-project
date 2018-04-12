@@ -52,7 +52,14 @@ public class BaseConsumer {
 		// Integer.valueOf(config.commitIntervalMs));
 
 		// props.put("session.timeout.ms", Integer.valueOf(config.sessionTimoutMs));
+		
+		// [!!!] important I just intend to start consume latest message for "fresh
+		// consumer" (= new consumer, there is no committed offset entry in zookeeper). In other
+		// language like Java, Kafka client API supports to set option map, like
+		// "auto.offset.reset=latest".
 		props.put("auto.offset.reset", "earliest");
+		
+		
 		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		return props;
